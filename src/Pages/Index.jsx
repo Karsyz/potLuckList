@@ -49,6 +49,7 @@ const Index = () => {
     }
 
     const url = 'https://backendfunctions.cyclic.app/potLuck/create'
+    
     try {
       const response = await axios.post(url, payload,
         {
@@ -164,7 +165,7 @@ const Index = () => {
               return (
                 <li key={ind} className='bg-emerald-400 w-fit p-3 rounded-md'>
                   <Link 
-                    to={`https://potlucklist.netlify.app/list/${list.listId}`}
+                    to={`${import.meta.env.VITE_DOMAIN}/list/${list.listId}`}
                     className="font-semibold text-lg"
                   >
                       {list.name}

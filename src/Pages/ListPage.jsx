@@ -9,8 +9,8 @@ import axios from 'axios'
 export const ListPage = () => {
   const [qrVisible, setQrVisible] = useState(false)
   const [userId, setUserId] = useState(null)
-  const [eventDate, setEventDate] = useState()
-  const [eventTime, setEventTime] = useState()
+  const [eventDate, setEventDate] = useState('')
+  const [eventTime, setEventTime] = useState('')
   const [file, setFile] = useState()
   const [list, setList] = useState({
     id: '',
@@ -59,11 +59,6 @@ export const ListPage = () => {
     if(createdItems) setCreatedItems(createdItems)
   }, []);
 
-  // useEffect(() => {
-  //   console.log(userId)
-  //   console.log(itemPayload)
-  // }, [userId, itemPayload]);
-
   useEffect(()=> {
     const handleEsc = (event) => {
       if (event.key === 'Escape') {
@@ -79,7 +74,7 @@ export const ListPage = () => {
   // parse date and time into state
   useEffect(() => {
     let localDateTime
-    if(list.eventDateTime !== 'Loading') {
+    if(list.eventDateTime) {
       localDateTime = new Intl.DateTimeFormat('en-us', {
       dateStyle: 'full',
       timeStyle: 'long',
@@ -154,14 +149,11 @@ export const ListPage = () => {
     }))
   }
 
-
+  
   return (
     <section className='flex flex-row justify-center py-10 px-2 sm:p-10 animate-fade'>
       <div className='flex flex-col gap-4 items-center w-full sm:w-[500px] z-10'>
-        
-        
-      <h1 className='font-bold text-3xl text-center'>{list.name}</h1>
-      {/* <h2 className='font-bold text-2xl text-center'>Potluck</h2> */}
+        <h1 className='font-bold text-3xl text-center'>{list.name}</h1>
         <span className='font-semibold text-xl text-center'>{eventDate}</span>
         <span className='font-semibold text-xl text-center'>{eventTime}</span>
         <p className='font-semibold text-xl text-center'>{list.description}</p>
@@ -285,7 +277,6 @@ export const ListPage = () => {
           </>
 
         }
-
 
     </section>
   )
