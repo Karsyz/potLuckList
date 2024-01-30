@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import QRCode from 'react-qr-code'
-import { FaPlus, FaRegImage, FaRegEdit, FaTrash } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
 import { LuImage, LuImagePlus } from 'react-icons/lu'
 import ShortUniqueId from 'short-unique-id'
 import axios from 'axios'
@@ -13,18 +13,16 @@ export const ListPage = () => {
   const [eventTime, setEventTime] = useState()
   const [file, setFile] = useState()
   const [list, setList] = useState({
-    id: 'Loading',
+    id: '',
     name: 'Loading',
-    description: 'Loading',
-    eventDateTime: 'Loading',
-    createdOn: 'Loading',
-    createdBy: 'Loading',
+    description: '',
+    eventDateTime: '',
+    createdOn: '',
+    createdBy: '',
     items: [],
   })
 
   const { listId } = useParams() 
-
-  const domain = 'https://backendfunctions.cyclic.app/potLuck'
 
   const [itemPayload, setItemPayload] = useState({
     listId: listId,
@@ -94,7 +92,7 @@ export const ListPage = () => {
 
   const handleAddItem = async (evt) => {
     evt.preventDefault()
-    const url = `${domain}/addItem`
+    const url = `${import.meta.env.VITE_API_URL}/addItem`
     const formData = new FormData();
     file && formData.append("file", file);
     for(const key in itemPayload) {
@@ -116,7 +114,7 @@ export const ListPage = () => {
   }
 
   const handleDeleteItem = async (id) => {
-    const url = `${domain}/removeItem`
+    const url = `${import.meta.env.VITE_API_URL}/removeItem`
     const payload = {
       userId: userId,
       listId: listId,
@@ -131,7 +129,7 @@ export const ListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const list = await axios.get(`${domain}/${listId}`)
+        const list = await axios.get(`${import.meta.env.VITE_API_URL}/${listId}`)
         setList(list.data)
       } catch (error) {
         console.error(error)
