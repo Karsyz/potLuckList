@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import ShortUniqueId from 'short-unique-id';
+import PreviousLists from '../Components/PreviousLists';
 
 const Index = () => {
   const [userId, setUserId] = useState('')
@@ -23,20 +24,6 @@ const Index = () => {
       setUserId(user)
     }
   }, []);
-
-    // load previous lists
-    useEffect(() => {
-      const prev = localStorage.getItem('previousLists')
-      if(prev) { 
-        setPreviousLists(JSON.parse(prev)) 
-      }else {
-        localStorage.setItem('previousLists', JSON.stringify([]))
-      } 
-    }, []);
-
-  // useEffect(() => {
-  //   console.log(userId)
-  // }, [userId]);
 
   const handleCreateList = async (evt) => {
     evt.preventDefault()
@@ -156,27 +143,12 @@ const Index = () => {
           </button>
         </form>
       </section>
-    
-      {previousLists?.length > 0 &&
-        <section className='w-full sm:w-9/12 md:w-1/2 px-2 mb-10'>
-          <h3 className='mb-3 text-2xl font-bold'>Previous Events</h3>
-          <ul className='flex flex-col gap-1'>
-            {previousLists.map((list, ind) => {
-              return (
-                <li key={ind} className='bg-emerald-400 w-fit p-3 rounded-md'>
-                  <Link 
-                    to={`${import.meta.env.VITE_DOMAIN}/list/${list.listId}`}
-                    className="font-semibold text-lg"
-                  >
-                      {list.name}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-      }
 
+      <PreviousLists
+        previousLists={previousLists} 
+        setPreviousLists={setPreviousLists}
+      />
+      
     </div>
   )
 }
