@@ -4,6 +4,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import ShortUniqueId from 'short-unique-id';
 import PreviousLists from '../Components/PreviousLists';
 
+const { VITE_API_URL } = import.meta.env
+
 const Index = () => {
   const [userId, setUserId] = useState('')
   const [creator, setCreator] = useState('')
@@ -35,7 +37,7 @@ const Index = () => {
       eventDateTime: dateTime,
     }
 
-    const url = 'https://backendfunctions.cyclic.app/potLuck/create'
+    const url = `${VITE_API_URL}/potLuck/create`
     
     try {
       const response = await axios.post(url, payload,

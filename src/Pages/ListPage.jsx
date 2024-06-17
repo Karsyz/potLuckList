@@ -6,6 +6,8 @@ import { LuImage, LuImagePlus } from 'react-icons/lu'
 import ShortUniqueId from 'short-unique-id'
 import axios from 'axios'
 
+const { VITE_API_URL } = import.meta.env
+
 export const ListPage = () => {
   const [qrVisible, setQrVisible] = useState(false)
   const [userId, setUserId] = useState(null)
@@ -87,7 +89,7 @@ export const ListPage = () => {
 
   const handleAddItem = async (evt) => {
     evt.preventDefault()
-    const url = `${import.meta.env.VITE_API_URL}/addItem`
+    const url = `${VITE_API_URL}/addItem`
     const formData = new FormData();
     file && formData.append("file", file);
     for(const key in itemPayload) {
@@ -109,7 +111,7 @@ export const ListPage = () => {
   }
 
   const handleDeleteItem = async (id) => {
-    const url = `${import.meta.env.VITE_API_URL}/removeItem`
+    const url = `${VITE_API_URL}/removeItem`
     const payload = {
       userId: userId,
       listId: listId,
@@ -124,7 +126,7 @@ export const ListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const list = await axios.get(`${import.meta.env.VITE_API_URL}/${listId}`)
+        const list = await axios.get(`${VITE_API_URL}/${listId}`)
         setList(list.data)
       } catch (error) {
         console.error(error)
