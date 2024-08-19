@@ -5,7 +5,6 @@ import ShortUniqueId from 'short-unique-id';
 import PreviousLists from '../Components/PreviousLists';
 
 const { VITE_API_URL } = import.meta.env
-console.log( VITE_API_URL)
 
 const Index = () => {
   const [userId, setUserId] = useState('')
@@ -65,7 +64,7 @@ const Index = () => {
       }
       
     } catch (err) { 
-      console.log(err)
+      console.error(err)
     }
 
   }

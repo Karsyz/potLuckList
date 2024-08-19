@@ -6,10 +6,7 @@ import { LuImage, LuImagePlus } from 'react-icons/lu'
 import ShortUniqueId from 'short-unique-id'
 import axios from 'axios'
 
-console.log('the right page')
-
 const { VITE_API_URL } = import.meta.env
-console.log( VITE_API_URL)
 
 export const ListPage = () => {
   const [qrVisible, setQrVisible] = useState(false)
