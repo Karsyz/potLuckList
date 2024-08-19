@@ -6,7 +6,10 @@ import { LuImage, LuImagePlus } from 'react-icons/lu'
 import ShortUniqueId from 'short-unique-id'
 import axios from 'axios'
 
+console.log('the right page')
+
 const { VITE_API_URL } = import.meta.env
+console.log( VITE_API_URL)
 
 export const ListPage = () => {
   const [qrVisible, setQrVisible] = useState(false)
@@ -123,15 +126,16 @@ export const ListPage = () => {
     setList(prev => ({...prev, items: response.data }))
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const list = await axios.get(`${VITE_API_URL}/${listId}`)
-        setList(list.data)
-      } catch (error) {
-        console.error(error)
-      }
+  const fetchData = async () => {
+    try {
+      const list = await axios.get(`${VITE_API_URL}/${listId}`)
+      setList(list.data)
+    } catch (error) {
+      console.error(error)
     }
+  }
+
+  useEffect(() => {
     fetchData()
   }, []);
 

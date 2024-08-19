@@ -5,6 +5,7 @@ import ShortUniqueId from 'short-unique-id';
 import PreviousLists from '../Components/PreviousLists';
 
 const { VITE_API_URL } = import.meta.env
+console.log( VITE_API_URL)
 
 const Index = () => {
   const [userId, setUserId] = useState('')
@@ -37,7 +38,7 @@ const Index = () => {
       eventDateTime: dateTime,
     }
 
-    const url = `${VITE_API_URL}/potLuck/create`
+    const url = `${VITE_API_URL}/create`
     
     try {
       const response = await axios.post(url, payload,

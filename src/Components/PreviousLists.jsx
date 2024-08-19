@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Link, useParams } from 'react-router-dom'
 
+const { VITE_ENV, VITE_DOMAIN} = import.meta.env
+
 // loads previous lists
 // usage 
   {/* <PreviousLists
@@ -28,7 +30,7 @@ const PreviousLists = ({previousLists, setPreviousLists}) => {
               return (
                 <li key={ind} className='bg-emerald-400 w-fit p-3 rounded-md'>
                   <Link 
-                    to={`${import.meta.env.VITE_DOMAIN}/list/${list.listId}`}
+                    to={`${VITE_ENV === 'dev' ? 'http://localhost:5173' : VITE_DOMAIN}/list/${list.listId}`}
                     className="font-semibold text-lg"
                   >
                       {list.name}
